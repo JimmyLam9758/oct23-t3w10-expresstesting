@@ -33,8 +33,14 @@ describe("v2/ functionality", () => {
 		*/
 
 		expect(response.body.data.movie).toBe("Dune");
-        expect(response.body.data.movie).toBeTruthy();
+		expect(response.body.data.movie).toBeTruthy();
 	})
+
+	it("v2/headercheck GET receives an auth header correctly", async () => {
+		const response = await request(app).get("/v2/headercheck").auth("jimmy was here", {type: "bearer"});
+
+        expect(response.body.data).toBe("Bearer jimmy was here");
+	});
 
 });
 
